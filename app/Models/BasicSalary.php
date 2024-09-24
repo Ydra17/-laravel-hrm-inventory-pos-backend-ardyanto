@@ -13,4 +13,9 @@ class BasicSalary extends Model
         'user_id',
         'basic_salary',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

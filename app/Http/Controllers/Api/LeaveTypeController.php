@@ -69,6 +69,35 @@ class LeaveTypeController extends Controller
         ], 200);
     }
 
+    //update
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'is_paid' => 'required',
+            'total_leaves' => 'required',
+            'max_leave_per_month' => 'nullable',
+        ]);
+
+        $leaveType = LeaveType::find($id);
+        if (!$leaveType) {
+            return response([
+                'message' => 'Leave type not found',
+            ], 404);
+        }
+
+        $leaveType->name = $request->name;
+        $leaveType->is_paid = $request->is_paid;
+        $leaveType->total_leaves = $request->total_leaves;
+        $leaveType->max_leave_per_month = $request->max_leave_per_month;
+        $leaveType->save();
+
+        return response([
+            'message' => 'Leave type updated successfully',
+            'data' => $leaveType,
+        ], 200);
+    }
+
     public function destroy($id)
     {
         $leaveType = LeaveType::find($id);

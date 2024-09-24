@@ -43,3 +43,14 @@ Route::apiResource('/attendances', App\Http\Controllers\Api\AttendanceController
 //payrolls
 Route::apiResource('/payrolls', App\Http\Controllers\Api\PayrollController::class)->middleware('auth:sanctum');
 
+//staffs
+Route::get('/staffs', [App\Http\Controllers\Api\StaffController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/staffs', [App\Http\Controllers\Api\StaffController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/staffs/{id}', [App\Http\Controllers\Api\StaffController::class, 'update'])->middleware('auth:sanctum');
+//delete
+Route::delete('/staffs/{id}', [App\Http\Controllers\Api\StaffController::class, 'destroy'])->middleware('auth:sanctum');
+
+//get company
+Route::get('/company', [App\Http\Controllers\Api\CompanyController::class, 'showCompany'])->middleware('auth:sanctum');
+//edit company
+Route::put('/company', [App\Http\Controllers\Api\CompanyController::class, 'editCompany'])->middleware('auth:sanctum');

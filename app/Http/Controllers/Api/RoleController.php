@@ -57,9 +57,13 @@ class RoleController extends Controller
     //update
     public function update(Request $request, $id)
     {
+        //validate request
+        // list permission
+        //
+        //
         $request->validate([
             'name' => 'required',
-            'permissionIds' => 'required|array',
+
         ]);
 
         $role = Role::find($id);
@@ -74,12 +78,25 @@ class RoleController extends Controller
         $role->description = $request->description;
         $role->save();
 
-        $role->permissions()->sync($request->permissionIds);
-
-
         return response([
             'message' => 'Role updated',
             'data' => $role
+        ], 200);
+    }
+
+    //delete
+    public function destroy($id)
+    {
+        $role = Role::find($id);
+        if (!$role) {
+            return response([
+                'message' => 'Role not found'
+            ], 404);
+        }
+
+        $role->delete();
+        return response([
+            'message' => 'Role deleted'
         ], 200);
     }
 }

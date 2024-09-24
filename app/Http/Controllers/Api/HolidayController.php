@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Holiday;
 
 class HolidayController extends Controller
 {
@@ -30,6 +31,7 @@ class HolidayController extends Controller
         ]);
 
         $holiday = new Holiday();
+        $holiday->created_by = $request->user()->id;
         $holiday->company_id = 1;
         $holiday->name = $request->name;
         $holiday->month = $request->month;

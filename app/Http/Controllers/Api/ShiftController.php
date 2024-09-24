@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Shift;
 
 class ShiftController extends Controller
 {
@@ -31,7 +32,7 @@ class ShiftController extends Controller
 
         $shift = new Shift();
         $shift->company_id = 1;
-        $shift->created_by = $user->id;
+        // $shift->created_by = $user->id;
         $shift->name = $request->name;
         $shift->clock_in_time = $request->clock_in_time;
         $shift->clock_out_time = $request->clock_out_time;

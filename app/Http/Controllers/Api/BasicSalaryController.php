@@ -11,7 +11,7 @@ class BasicSalaryController extends Controller
     //index
     public function index()
     {
-        $basicSalaries = BasicSalary::all();
+        $basicSalaries = BasicSalary::with('user')->get();
         return response([
             'message' => 'Basic Salaries list',
             'data' => $basicSalaries

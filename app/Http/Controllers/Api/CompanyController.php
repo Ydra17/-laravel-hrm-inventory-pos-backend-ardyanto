@@ -20,14 +20,14 @@ class CompanyController extends Controller
             $company->email = $request->email;
         }
 
-        if ($request->has('logo')) {
-            $request->validate([
-                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            ]);
-            $imageName = time() . '.' . $request->logo->extension();
-            $request->logo->move(public_path('images'), $imageName);
-            $company->logo = $imageName;
-        }
+        // if ($request->has('logo')) {
+        //     $request->validate([
+        //         'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        //     ]);
+        //     $imageName = time() . '.' . $request->logo->extension();
+        //     $request->logo->move(public_path('images'), $imageName);
+        //     $company->logo = $imageName;
+        // }
 
         if ($request->has('website')) {
             $company->website = $request->website;
@@ -74,6 +74,15 @@ class CompanyController extends Controller
         return response([
             'message' => 'Company updated successfully',
             'company' => $company
+        ], 200);
+    }
+
+    public function showCompany()
+    {
+        $company = Company::where('id', 1)->first();
+        return response([
+            'message' => 'Company Details',
+            'company' =>$company
         ], 200);
     }
 }
