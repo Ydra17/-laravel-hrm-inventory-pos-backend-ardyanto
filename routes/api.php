@@ -54,3 +54,11 @@ Route::delete('/staffs/{id}', [App\Http\Controllers\Api\StaffController::class, 
 Route::get('/company', [App\Http\Controllers\Api\CompanyController::class, 'showCompany'])->middleware('auth:sanctum');
 //edit company
 Route::put('/company', [App\Http\Controllers\Api\CompanyController::class, 'editCompany'])->middleware('auth:sanctum');
+
+// categories
+Route::apiResource('/categories', App\Http\Controllers\Api\Inventory\CategoryController::class)->middleware('auth:sanctum');
+Route::apiResource('/brands', App\Http\Controllers\Api\Inventory\BrandController::class)->middleware('auth:sanctum');
+Route::apiResource('/units', App\Http\Controllers\Api\Inventory\UnitController::class)->middleware('auth:sanctum');
+Route::apiResource('/warehouses', App\Http\Controllers\Api\Inventory\WarehouseController::class)->middleware('auth:sanctum');
+Route::apiResource('/suppliers', App\Http\Controllers\Api\Inventory\SupplierController::class)->middleware('auth:sanctum');
+Route::apiResource('/products', App\Http\Controllers\Api\Inventory\ProductController::class)->middleware('auth:sanctum');
