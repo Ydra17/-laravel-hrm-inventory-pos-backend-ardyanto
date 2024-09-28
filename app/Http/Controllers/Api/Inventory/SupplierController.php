@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Inventory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Supplier;
 
 class SupplierController extends Controller
@@ -31,10 +32,10 @@ class SupplierController extends Controller
 
         $supplier = new Supplier();
         $supplier->name = $request->name;
+        $supplier->slug = Str::slug($request->name);
         $supplier->address = $request->address;
         $supplier->phone = $request->phone;
         $supplier->email = $request->email;
-        $supplier->company_id = '1';
         $supplier->save();
 
         return response()->json([
@@ -88,6 +89,23 @@ class SupplierController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Supplier updated successfully',
+            'data' => $supplier
+        ], 200);
+    }
+
+    public function show($id)
+    {
+        $supplier = Supplier::find($id);
+        if (!$supplier) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Supplier not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Suuplier retrieced successfully',
             'data' => $supplier
         ], 200);
     }

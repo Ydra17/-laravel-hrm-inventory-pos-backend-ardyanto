@@ -56,6 +56,14 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->item_code = $request->item_code;
         $product->company_id = '1';
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = time() . '.' . $photo->getClientOriginalExtension();
+            $filePath = $photo->storeAs('images/products', $photo_name, 'public');
+            $product->photo = $filePath;
+        }
+
         $product->save();
 
         return response()->json([
@@ -121,11 +129,38 @@ class ProductController extends Controller
         //status
         $product->status = $request->status;
         $product->item_code = $request->item_code;
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = time() . '.' . $photo->getClientOriginalExtension();
+            $filePath = $photo->storeAs('images/products', $photo_name, 'public');
+            $product->photo = $filePath;
+        }
+
         $product->save();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Product updated successfully',
+            'data' => $product
+        ], 200);
+    }
+
+    public function show($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Product not found'
+            ], 404);
+        }
+
+        $product->load('category', 'brand', 'unit', 'warehouse');
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Product retrieced successfully',
             'data' => $product
         ], 200);
     }

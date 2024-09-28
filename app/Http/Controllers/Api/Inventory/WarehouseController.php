@@ -94,4 +94,21 @@ class WarehouseController extends Controller
             'data' => $warehouse
         ], 200);
     }
+
+    public function show($id)
+    {
+        $warehouse = Warehouse::find($id);
+        if (!$warehouse) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Warehouse not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Warehouse retrieced successfully',
+            'data' => $warehouse
+        ], 200);
+    }
 }
