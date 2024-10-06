@@ -67,5 +67,6 @@ Route::post('/products/{id}', [App\Http\Controllers\Api\Inventory\ProductControl
 
 Route::apiResource('/purchases', App\Http\Controllers\Api\Inventory\PurchaseController::class)->middleware('auth:sanctum');
 Route::apiResource('/warehouse-stocks', App\Http\Controllers\Api\Inventory\WarehouseStockController::class)->middleware('auth:sanctum');
+Route::apiResource('/stock-opname', App\Http\Controllers\Api\Inventory\StockOpnameController::class)->middleware('auth:sanctum');
 
 
