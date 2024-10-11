@@ -28,7 +28,14 @@ class BrandController extends Controller
         $brand = new Brand();
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
-        $brand->description = $request->description;
+        // $brand->description = $request->description;
+        //image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $file_path = $image->storeAs('images/brands', $image_name, 'public');
+            $brand->image = $file_path;
+        }
         $brand->company_id = '1';
         $brand->save();
 
@@ -73,7 +80,13 @@ class BrandController extends Controller
 
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
-        $brand->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $file_path = $image->storeAs('images/brands', $image_name, 'public');
+            $brand->image = $file_path;
+        }
         $brand->save();
 
         return response()->json([

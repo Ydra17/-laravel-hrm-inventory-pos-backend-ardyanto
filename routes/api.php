@@ -58,6 +58,8 @@ Route::put('/company', [App\Http\Controllers\Api\CompanyController::class, 'edit
 // categories
 Route::apiResource('/categories', App\Http\Controllers\Api\Inventory\CategoryController::class)->middleware('auth:sanctum');
 Route::apiResource('/brands', App\Http\Controllers\Api\Inventory\BrandController::class)->middleware('auth:sanctum');
+Route::post('/brands/{id}', [App\Http\Controllers\Api\Inventory\BrandController::class, 'update'])->middleware('auth:sanctum');
+
 Route::apiResource('/units', App\Http\Controllers\Api\Inventory\UnitController::class)->middleware('auth:sanctum');
 Route::apiResource('/warehouses', App\Http\Controllers\Api\Inventory\WarehouseController::class)->middleware('auth:sanctum');
 Route::apiResource('/suppliers', App\Http\Controllers\Api\Inventory\SupplierController::class)->middleware('auth:sanctum');
@@ -68,5 +70,8 @@ Route::post('/products/{id}', [App\Http\Controllers\Api\Inventory\ProductControl
 Route::apiResource('/purchases', App\Http\Controllers\Api\Inventory\PurchaseController::class)->middleware('auth:sanctum');
 Route::apiResource('/warehouse-stocks', App\Http\Controllers\Api\Inventory\WarehouseStockController::class)->middleware('auth:sanctum');
 Route::apiResource('/stock-opname', App\Http\Controllers\Api\Inventory\StockOpnameController::class)->middleware('auth:sanctum');
+Route::apiResource('/stock-opname', App\Http\Controllers\Api\Inventory\StockOpnameController::class)->middleware('auth:sanctum');
+
+Route::apiResource('/permissions', App\Http\Controllers\Api\PermissionController::class)->middleware('auth:sanctum');
 
 

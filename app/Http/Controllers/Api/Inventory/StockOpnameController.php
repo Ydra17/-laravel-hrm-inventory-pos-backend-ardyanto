@@ -55,7 +55,7 @@ class StockOpnameController extends Controller
         ]);
 
         $stockOpname = StockOpname::find($id);
-        if (!$stockOpname) { 
+        if (!$stockOpname) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Stock opname not found'
