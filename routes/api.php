@@ -57,6 +57,8 @@ Route::put('/company', [App\Http\Controllers\Api\CompanyController::class, 'edit
 
 // categories
 Route::apiResource('/categories', App\Http\Controllers\Api\Inventory\CategoryController::class)->middleware('auth:sanctum');
+Route::post('/categories/{id}', [App\Http\Controllers\Api\Inventory\CategoryController::class, 'update'])->middleware('auth:sanctum');
+
 Route::apiResource('/brands', App\Http\Controllers\Api\Inventory\BrandController::class)->middleware('auth:sanctum');
 Route::post('/brands/{id}', [App\Http\Controllers\Api\Inventory\BrandController::class, 'update'])->middleware('auth:sanctum');
 

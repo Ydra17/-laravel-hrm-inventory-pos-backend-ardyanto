@@ -13,6 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $products->load('category', 'brand', 'unit', 'warehouse');
         return response()->json([
             'status' => 'success',
             'message' => 'Products retrieved successfully',

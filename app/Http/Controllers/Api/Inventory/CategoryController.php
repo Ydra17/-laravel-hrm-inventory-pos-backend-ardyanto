@@ -33,6 +33,14 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->parent_id = $request->parent_id;
         $category->company_id = 1;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $file_path = $image->storeAs('images/categories', $image_name, 'public');
+            $category->image = $file_path;
+        }
+
         $category->save();
 
         return response()->json([
@@ -80,6 +88,12 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name);
         $category->description = $request->description;
         $category->parent_id = $request->parent_id;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $file_path = $image->storeAs('images/categories', $image_name, 'public');
+            $category->image = $file_path;
+        }
         $category->save();
 
         return response()->json([
